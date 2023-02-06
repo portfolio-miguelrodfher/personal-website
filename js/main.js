@@ -160,6 +160,27 @@
 		});	
 	};
 
+var views = 0;
+var ignoreIp = "65.35.37.76"; // Replace with your own IP address
+
+window.onload = function() {
+  // Retrieve the user's IP address
+  fetch("https://api.ipify.org?format=json")
+    .then(response => response.json())
+    .then(data => {
+      // If the IP address does not match the ignored IP address, increment the view count
+      if (data.ip !== ignoreIp) {
+        views = localStorage.getItem("views") || 0;
+        views++;
+        localStorage.setItem("views", views);
+      }
+
+      // Display the updated view count on the page
+      document.getElementById("view-count").innerHTML = views;
+    });
+};
+
+
 	
 
 
